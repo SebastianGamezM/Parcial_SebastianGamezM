@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -25,9 +26,11 @@ public class GameManager : MonoBehaviour
 
     public void IniciarJuego()
     {
+        Debug.Log("inciando el juego");
+        StopAllCoroutines();
         juegoActivo = true;
-        StartCoroutine(scriptSpawn.AparecerObstaculo());
         canvasPlay.SetActive(false);
+        StartCoroutine(scriptSpawn.AparecerObstaculo());
         audioSources[0].clip = cancion;
         audioSources[0].Play();
         audioSources[0].loop = true;
@@ -44,10 +47,11 @@ public class GameManager : MonoBehaviour
     public void Derrota()
     {
         juegoActivo = false;
-        canvasPlay.SetActive(true);
+
         audioSources[0].clip = derrota;
         audioSources[0].Play();
         audioSources[0].loop = false;
+        canvasPlay.SetActive(true);
 
         puntos = 0;
         textMeshPuntos.text = ("puntos = " + puntos);
